@@ -210,6 +210,7 @@ const Agent = ({
 
       <div className="w-full flex justify-center">
         {callStatus !== "ACTIVE" ? (
+          // handleCall triggers the useEffect
           <button className="relative btn-call" onClick={() => handleCall()}>
             <span
               className={cn(
