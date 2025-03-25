@@ -39,6 +39,7 @@ export async function signup(params: SignUpParams) {
     };
   }
 }
+// What is signin? ==>GET(credentials)-:>CHECK(?email)-:>setSessionCookie(CALLED)
 export async function signin(params: SignInParams) {
   const { email, idToken } = params;
   // Getting the credentials from the user
@@ -62,6 +63,7 @@ export async function signin(params: SignInParams) {
 }
 
 // This function creates and sets the cookie of the user on the web
+// What is setSessionCookie? ==> Just create one and then  set using  the functionalities
 export async function setSessionCookie(idToken: string) {
   const cookieStore = await cookies();
   const sessionCookie = await auth.createSessionCookie(idToken, {
@@ -76,11 +78,11 @@ export async function setSessionCookie(idToken: string) {
     sameSite: "lax",
   });
 }
-
+// What is getCurrentUser? ==>return the user logged-in currently...(The one with the session cookie)
 export async function getCurrentUser(): Promise<User | null> {
   const cookieStore = cookies();
   const sessionCookie = (await cookieStore).get("Session")?.value;
-  console.log("Session Cookie", sessionCookie);
+  // console.log("Session Cookie", sessionCookie);
   if (!sessionCookie) return null;
   try {
     // verifying the session cookie on the server
